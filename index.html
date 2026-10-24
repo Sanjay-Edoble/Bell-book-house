@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bell Book House | 2026 Wholesale Order Sheet — Pay & Collect</title>
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Modern Clean Typography: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome 6 Icons via CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- jsPDF & jsPDF-AutoTable for Vector Client-Side PDF Generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '"Inter"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Sleek custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f8fafc;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* Hide number input spinners for clean compact inputs */
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
+    }
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    /* Drawer smooth transitions */
+    .drawer-backdrop {
+      transition: opacity 0.25s ease-out;
+    }
+    .drawer-panel {
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-[#f8fafc] text-slate-800 font-sans antialiased min-h-screen flex flex-col pb-24 md:pb-8 selection:bg-slate-900 selection:text-white">
+
+  <!-- ========================================================
+       TOP HEADER (BELL BOOK HOUSE)
+  ======================================================== -->
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-18 gap-3">
+        
+        <!-- Left: Brand Logo & Title -->
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-slate-900 text-amber-400 flex items-center justify-center font-black text-sm shadow-xs border border-slate-700">
+            BBH
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-base sm:text-lg text-slate-900 tracking-tight">Bell Book House</span>
+              <span class="text-[10px] sm:text-xs font-semibold px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
+                Pay & Collect
+              </span>
+            </div>
+            <p class="text-xs text-slate-500 hidden sm:block">
+              Standard Fireworks & Durkesh • Cuddalore • Order Desk: <span class="text-slate-900 font-bold">8248185491</span> / 96267 01732
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: Actions -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          
+          <!-- Direct WhatsApp Order Desk Link (8248185491) -->
+          <a 
+            href="https://wa.me/918248185491?text=Hello%20Bell%20Book%20House%2C%20I%20am%20inquiring%20about%20ordering%20from%20the%202026%20Price%20List." 
+            target="_blank" 
+            title="Chat with Order Desk on WhatsApp"
+            class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-xs font-semibold border border-emerald-200 transition-colors"
+          >
+            <i class="fa-brands fa-whatsapp text-sm text-emerald-600"></i>
+            <span>WhatsApp: 8248185491</span>
+          </a>
+
+          <!-- Cart Drawer Button -->
+          <button 
+            onclick="toggleCartDrawer(true)" 
+            class="flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs sm:text-sm shadow-xs transition-all active:scale-95"
+          >
+            <i class="fa-solid fa-cart-shopping text-xs"></i>
+            <span class="hidden sm:inline">Order Cart</span>
+            <span id="nav-cart-count" class="inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 text-xs font-bold bg-amber-400 text-slate-950 rounded-full">
+              0
+            </span>
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================
+       ORDER-SHEET HEADER & DISCOUNT POLICY (OFFER NOT FOR COMBOS)
+  ======================================================== -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-5">
+
+    <!-- Store Info & Discount Rule Banner -->
+    <section class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-xs">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        
+        <div class="space-y-1.5">
+          <div class="flex flex-wrap items-center gap-2 text-xs font-semibold text-slate-600">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span>2026 Wholesale Order Sheet</span>
+            <span class="text-slate-300">•</span>
+            <span class="text-emerald-700 font-bold">Store Pickup: Pay & Collect</span>
+            <span class="text-slate-300">•</span>
+            <span class="text-slate-500">Zero Tax</span>
+          </div>
+          <h1 class="text-lg sm:text-2xl font-extrabold text-slate-900 tracking-tight">
+            Bell Book House — Wholesale Price List & Order Booking
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-500 max-w-2xl leading-relaxed">
+            Fill your required quantities below. Send the quotation directly to our WhatsApp booking desk 
+            (<strong class="text-slate-800">8248185491</strong>) and collect your packed order at our store in Cuddalore.
+          </p>
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-amber-50 border border-amber-200/80 text-[11px] text-amber-800 font-medium">
+            <i class="fa-solid fa-circle-info text-amber-600"></i>
+            <span><strong>Note on Combos:</strong> Featured Promotional Combos are already heavily pre-discounted net rates; additional 20%/30% festival discounts apply to all single catalog items.</span>
+          </div>
+        </div>
+
+        <!-- Clean Discount Cards (20% & 30%) -->
+        <div class="grid grid-cols-2 gap-3 shrink-0">
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-2.5 sm:p-3 text-center min-w-[130px]">
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Single Items</span>
+            <span class="text-lg sm:text-xl font-black text-slate-900 block">20% OFF</span>
+            <span class="text-[11px] text-slate-500">Flat on catalog items</span>
+          </div>
+
+          <div class="bg-emerald-50/70 border border-emerald-200 rounded-xl p-2.5 sm:p-3 text-center min-w-[130px]">
+            <span class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider block">Above ₹3,000</span>
+            <span class="text-lg sm:text-xl font-black text-emerald-700 block">30% OFF</span>
+            <span class="text-[11px] text-emerald-600 font-semibold">Tier on single items</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================
+         STICKY SEARCH & CATEGORY JUMP CHIPS
+    ======================================================== -->
+    <section class="sticky top-16 sm:top-18 z-20 bg-[#f8fafc]/95 backdrop-blur-md pt-1 pb-3 space-y-2.5">
+      
+      <!-- Search Bar -->
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+          <i class="fa-solid fa-magnifying-glass text-xs sm:text-sm"></i>
+        </div>
+        <input 
+          type="text" 
+          id="catalog-search" 
+          oninput="handleSearch(this.value)"
+          placeholder="Filter order sheet by item name or code (e.g. '372', 'Lakshmi', 'Flower Pot', 'Shot')..." 
+          class="w-full pl-9 pr-9 py-2 bg-white border border-slate-200 focus:border-slate-400 focus:ring-1 focus:ring-slate-400 rounded-xl text-xs sm:text-sm text-slate-800 placeholder-slate-400 shadow-2xs outline-none transition-all"
+        >
+        <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600">
+          <i class="fa-solid fa-circle-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <!-- Category Jump Chips -->
+      <div class="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar text-xs font-semibold" id="category-chips-nav">
+        <!-- Injected via JavaScript -->
+      </div>
+
+    </section>
+
+    <!-- ========================================================
+         ORDER-SHEET SECTIONS (Grouped by Category)
+    ======================================================== -->
+    <div id="catalog-sections-container" class="space-y-6 sm:space-y-8">
+      <!-- Injected dynamically by category via JS -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="catalog-empty-state" class="hidden text-center py-16 px-4 bg-white rounded-2xl border border-dashed border-slate-200">
+      <div class="w-12 h-12 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-3 text-lg">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+      <h3 class="text-base font-bold text-slate-800">No matching products found</h3>
+      <p class="text-xs text-slate-500 mt-1 max-w-sm mx-auto">Try clearing your search query to view the full price list.</p>
+      <button onclick="clearSearch()" class="mt-3 px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-semibold hover:bg-slate-800">
+        Clear Filter
+      </button>
+    </div>
+
+  </main>
+
+  <!-- ========================================================
+       FOOTER
+  ======================================================== -->
+  <footer class="border-t border-slate-200 bg-white py-6 text-xs text-slate-500 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+      <div>
+        <span class="font-bold text-slate-800">Bell Book House</span>
+        <span>• GRK Link Road, Krishnalaya Complex, Cuddalore - 607 002</span>
+      </div>
+      <div class="text-slate-700 font-semibold">
+        WhatsApp Booking: <strong>8248185491</strong> • Support: <strong>96267 01732</strong>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================
+       MOBILE STICKY BOTTOM CHECKOUT BAR
+  ======================================================== -->
+  <div id="mobile-bottom-bar" class="fixed bottom-0 inset-x-0 bg-white border-t border-slate-200 p-3 z-30 md:hidden flex items-center justify-between shadow-lg shadow-black/10">
+    <div>
+      <span class="text-[10px] text-slate-500 block leading-tight">Pay & Collect (<span id="mobile-bar-items">0 items</span>)</span>
+      <span id="mobile-bar-total" class="text-base font-extrabold text-slate-900">₹0</span>
+    </div>
+    <button 
+      onclick="toggleCartDrawer(true)" 
+      class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs rounded-xl shadow-xs flex items-center gap-2"
+    >
+      <i class="fa-solid fa-receipt"></i>
+      <span>Review & Order</span>
+    </button>
+  </div>
+
+  <!-- ========================================================
+       SLIDE-OVER CART DRAWER
+  ======================================================== -->
+  <div id="cart-drawer-container" class="fixed inset-0 z-50 pointer-events-none transition-all">
+    <!-- Backdrop Overlay -->
+    <div 
+      id="cart-backdrop" 
+      onclick="toggleCartDrawer(false)" 
+      class="drawer-backdrop fixed inset-0 bg-slate-900/40 backdrop-blur-xs opacity-0 pointer-events-none"
+    ></div>
+
+    <!-- Sliding Panel -->
+    <div 
+      id="cart-panel" 
+      class="drawer-panel fixed inset-y-0 right-0 max-w-full w-full sm:w-[480px] bg-white border-l border-slate-200 shadow-2xl flex flex-col transform translate-x-full pointer-events-auto"
+    >
+      <!-- Header -->
+      <div class="p-4 sm:p-5 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-sm">
+            <i class="fa-solid fa-receipt"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-slate-900 text-sm sm:text-base leading-tight">Order Cart — Pay & Collect</h3>
+            <p id="drawer-item-summary" class="text-xs text-slate-500">0 items selected</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-1.5">
+          <button 
+            id="clear-cart-btn"
+            onclick="confirmClearCart()" 
+            class="text-xs text-rose-600 hover:bg-rose-50 px-2.5 py-1.5 rounded-lg font-semibold transition-colors hidden"
+          >
+            Clear Cart
+          </button>
+          <button 
+            onclick="toggleCartDrawer(false)" 
+            class="w-8 h-8 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200/60 flex items-center justify-center transition-colors"
+          >
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Discount Progress Banner -->
+      <div id="drawer-discount-banner" class="bg-slate-100/90 px-4 py-2 border-b border-slate-200 text-xs">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Item List -->
+      <div id="cart-items-list" class="flex-1 overflow-y-auto p-4 space-y-2">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Empty Cart State -->
+      <div id="cart-empty-state" class="flex-1 flex flex-col items-center justify-center p-6 text-center">
+        <div class="w-14 h-14 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center text-xl mb-3">
+          <i class="fa-solid fa-cart-arrow-down"></i>
+        </div>
+        <h4 class="font-bold text-slate-800 text-sm">Your cart is empty</h4>
+        <p class="text-xs text-slate-500 mt-1 max-w-xs">
+          Enter quantities in the order sheet to place your Pay & Collect order.
+        </p>
+        <button 
+          onclick="toggleCartDrawer(false)" 
+          class="mt-4 px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded-xl shadow-xs transition-colors"
+        >
+          View Order Sheet
+        </button>
+      </div>
+
+      <!-- Cart Footer (Financial Breakdown) -->
+      <div id="cart-footer" class="border-t border-slate-200 p-4 sm:p-5 bg-slate-50 space-y-3 hidden">
+        
+        <!-- Summary Box -->
+        <div class="space-y-1.5 text-xs text-slate-600 bg-white p-3.5 rounded-xl border border-slate-200 shadow-2xs">
+          
+          <!-- Regular items subtotal -->
+          <div class="flex items-center justify-between">
+            <span class="text-slate-500">Eligible Single Items Total:</span>
+            <span id="summary-regular-subtotal" class="font-semibold text-slate-900">₹0</span>
+          </div>
+
+          <!-- Festival Discount on single items -->
+          <div class="flex items-center justify-between text-emerald-700">
+            <div class="flex items-center gap-1.5">
+              <span>Festival Discount:</span>
+              <span id="summary-discount-badge" class="text-[10px] bg-emerald-50 text-emerald-700 font-bold px-1.5 py-0.5 rounded border border-emerald-200">
+                20% OFF
+              </span>
+            </div>
+            <span id="summary-discount" class="font-bold">-₹0</span>
+          </div>
+
+          <!-- Combos subtotal (if any) -->
+          <div id="summary-combo-row" class="flex items-center justify-between text-slate-700 pt-1 border-t border-slate-100 hidden">
+            <div class="flex items-center gap-1">
+              <span>Featured Combos:</span>
+              <span class="text-[10px] text-slate-400">(Pre-discounted Net Price)</span>
+            </div>
+            <span id="summary-combo-total" class="font-semibold text-slate-900">₹0</span>
+          </div>
+
+          <!-- Grand Total (Zero Tax) -->
+          <div class="pt-2 border-t border-slate-200 flex items-center justify-between">
+            <div>
+              <span class="text-xs sm:text-sm font-extrabold text-slate-900 block leading-tight">NET PAYABLE:</span>
+              <span class="text-[10px] text-emerald-700 font-semibold">Store Pickup • Pay & Collect</span>
+            </div>
+            <span id="summary-grand-total" class="text-base sm:text-lg font-black text-slate-900">₹0</span>
+          </div>
+        </div>
+
+        <button 
+          onclick="openQuotationModal()" 
+          class="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm shadow-sm flex items-center justify-center gap-2 transition-all active:scale-[0.99]"
+        >
+          <i class="fa-solid fa-paper-plane text-sm"></i>
+          <span>Place Order (Pay & Collect)</span>
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       CUSTOMER DETAILS & QUOTATION / WHATSAPP MODAL
+  ======================================================== -->
+  <div id="quotation-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <!-- Backdrop -->
+    <div onclick="closeQuotationModal()" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs transition-opacity"></div>
+
+    <!-- Modal Box -->
+    <div class="relative bg-white rounded-2xl shadow-xl border border-slate-200 w-full max-w-lg max-h-[92vh] flex flex-col z-10 overflow-hidden my-auto">
+      
+      <div class="px-5 py-4 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center text-xs font-bold">
+            <i class="fa-brands fa-whatsapp text-sm"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-slate-900 text-sm sm:text-base">Place Order — Pay & Collect</h3>
+            <p class="text-xs text-slate-500">Sends directly to WhatsApp: <strong class="text-slate-800">8248185491</strong></p>
+          </div>
+        </div>
+        <button onclick="closeQuotationModal()" class="w-8 h-8 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200/50 flex items-center justify-center">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="p-5 overflow-y-auto space-y-3.5 text-xs">
+        
+        <!-- Store Destination Indicator -->
+        <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 flex items-center justify-between gap-2">
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-800 block">Order Destination</span>
+            <span class="font-extrabold text-sm text-emerald-950">Bell Book House Order Desk (8248185491)</span>
+          </div>
+          <span class="bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Default</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2.5 bg-slate-50 p-3 rounded-xl border border-slate-200">
+          <div>
+            <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Order Ref No.</label>
+            <input type="text" id="modal-quote-id" class="w-full px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-mono font-bold text-slate-800" readonly>
+          </div>
+          <div>
+            <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Date</label>
+            <input type="date" id="modal-quote-date" class="w-full px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-medium text-slate-800">
+          </div>
+        </div>
+
+        <div class="space-y-2.5">
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Your Name / Organization <span class="text-rose-500">*</span></label>
+            <input 
+              type="text" 
+              id="cust-name" 
+              placeholder="e.g. Senthil Kumar"
+              class="w-full px-3 py-2 bg-slate-50 focus:bg-white border border-slate-200 focus:border-slate-400 rounded-xl text-slate-900 outline-none transition-all placeholder-slate-400"
+            >
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Your Mobile Number <span class="text-rose-500">*</span></label>
+              <input 
+                type="tel" 
+                id="cust-phone" 
+                placeholder="e.g. 98401 23456"
+                class="w-full px-3 py-2 bg-slate-50 focus:bg-white border border-slate-200 focus:border-slate-400 rounded-xl text-slate-900 outline-none transition-all placeholder-slate-400"
+              >
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">City / Town Location</label>
+              <input 
+                type="text" 
+                id="cust-address" 
+                placeholder="e.g. Cuddalore / Panruti"
+                class="w-full px-3 py-2 bg-slate-50 focus:bg-white border border-slate-200 focus:border-slate-400 rounded-xl text-slate-900 outline-none transition-all placeholder-slate-400"
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 flex items-center justify-between text-xs">
+          <div>
+            <span class="text-slate-500 font-medium block">Order Summary:</span>
+            <span id="modal-summary-items" class="text-slate-800 font-semibold">0 items</span>
+          </div>
+          <div class="text-right">
+            <span class="text-slate-500 text-[10px] block">Net Payable (Pay & Collect):</span>
+            <span id="modal-summary-total" class="text-base font-extrabold text-slate-900">₹0</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="p-4 border-t border-slate-200 bg-slate-50 flex flex-col sm:flex-row items-center justify-end gap-2">
+        <button 
+          type="button" 
+          onclick="closeQuotationModal()" 
+          class="w-full sm:w-auto px-3.5 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-semibold text-xs hover:bg-slate-100"
+        >
+          Cancel
+        </button>
+
+        <!-- Save PDF button -->
+        <button 
+          type="button" 
+          onclick="generatePDFQuotation(false)" 
+          class="w-full sm:w-auto px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs shadow-2xs flex items-center justify-center gap-1.5 transition-all"
+        >
+          <i class="fa-solid fa-download text-xs"></i>
+          <span>Save PDF</span>
+        </button>
+
+        <!-- Direct Chat Order Text Button -->
+        <button 
+          type="button" 
+          onclick="sendDirectTextOrder()" 
+          title="Direct 1-tap chat with 8248185491"
+          class="w-full sm:w-auto px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs shadow-xs flex items-center justify-center gap-1.5 transition-all"
+        >
+          <i class="fa-solid fa-comment-dots text-xs"></i>
+          <span>Chat Text (8248185491)</span>
+        </button>
+
+        <!-- Share PDF Document directly on WhatsApp -->
+        <button 
+          type="button" 
+          onclick="sharePDFDocument()" 
+          class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-xs flex items-center justify-center gap-1.5 transition-all"
+        >
+          <i class="fa-brands fa-whatsapp text-sm"></i>
+          <span>Share PDF on WhatsApp</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 pointer-events-none max-w-sm w-full px-4"></div>
+
+  <!-- ========================================================
+       CORE LOGIC
+  ======================================================== -->
+  <script>
+    /**
+     * BELL BOOK HOUSE - 2026 WHOLESALE ORDER SHEET
+     * Features:
+     * - Offers (20%/30%) apply to Single Items ONLY (Combos are pre-discounted net prices)
+     * - Default WhatsApp Order Destination: 8248185491
+     * - Flow: Place Order -> Pay & Collect at Bell Book House, Cuddalore
+     * - Client-side vector PDF generation and WhatsApp Direct Share
+     */
+
+    // ----------------------------------------------------
+    // 1. CATEGORY METADATA & GRAPHICAL ICONS
+    // ----------------------------------------------------
+    const CATEGORY_META = {
+      "FEATURED COMBOS": {
+        name: "Featured Promotional Combos",
+        tagline: "Pre-discounted special bundles (Offer discount not applicable for combos)",
+        isCombo: true,
+        bgLight: "bg-amber-50/70 border-amber-200",
+        svg: `<svg class="w-8 h-8 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 12 20 22 4 22 4 12"></polyline>
+          <rect x="2" y="7" width="20" height="5"></rect>
+          <line x1="12" y1="22" x2="12" y2="7"></line>
+          <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+          <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+        </svg>`
+      },
+      "SPARKLERS": {
+        name: "Sparklers / Phooljhadi",
+        tagline: "12cm, 15cm, 30cm, 50cm, 75cm crackling & colour sparklers",
+        bgLight: "bg-yellow-50/70 border-yellow-200",
+        svg: `<svg class="w-8 h-8 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+          <path d="M5 3v4"/>
+          <path d="M19 17v4"/>
+          <path d="M3 5h4"/>
+          <path d="M17 19h4"/>
+        </svg>`
+      },
+      "ONE & TWO SOUND": {
+        name: "One Sound & Two Sound Crackers",
+        tagline: "Classic Sparrow, Lakshmi 9cm/10cm, Double Sound & Bijili",
+        bgLight: "bg-rose-50/70 border-rose-200",
+        svg: `<svg class="w-8 h-8 text-rose-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="m4.93 4.93 2.83 2.83"/>
+          <path d="m16.24 16.24 2.83 2.83"/>
+          <path d="M2 12h4"/>
+          <path d="M18 12h4"/>
+          <path d="m4.93 19.07 2.83-2.83"/>
+          <path d="m16.24 7.76 2.83-2.83"/>
+          <path d="M12 2v4"/>
+          <path d="M12 18v4"/>
+        </svg>`
+      },
+      "FLOWER POTS": {
+        name: "Flower Pots / Anar Fountains",
+        tagline: "Small, Big, Special, Giant, Sony & Colour Peacock Fountains",
+        bgLight: "bg-orange-50/70 border-orange-200",
+        svg: `<svg class="w-8 h-8 text-orange-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+        </svg>`
+      },
+      "ZAMIN CHAKKAR": {
+        name: "Zamin Chakkar / Ground Wheels",
+        tagline: "Big, Ashoka, Deluxe, Sony Special & 4x4 Starvell Wheels",
+        bgLight: "bg-blue-50/70 border-blue-200",
+        svg: `<svg class="w-8 h-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 2v7"/>
+          <path d="M12 15v7"/>
+          <path d="m4.93 4.93 4.95 4.95"/>
+          <path d="m14.12 14.12 4.95 4.95"/>
+          <path d="M2 12h7"/>
+          <path d="M15 12h7"/>
+          <path d="m4.93 19.07 4.95-4.95"/>
+          <path d="m14.12 9.88 4.95-4.95"/>
+        </svg>`
+      },
+      "FANCY CRACKERS": {
+        name: "Fancy Novelty Fireworks",
+        tagline: "Twinkling stars, candles, waterfall pencils, swords & cars",
+        bgLight: "bg-purple-50/70 border-purple-200",
+        svg: `<svg class="w-8 h-8 text-purple-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15 4-3 3"/>
+          <path d="m18 7-3 3"/>
+          <path d="m20 12-4-4L4 20l4 4 12-12Z"/>
+          <circle cx="7" cy="7" r="1"/>
+          <circle cx="17" cy="17" r="1"/>
+        </svg>`
+      },
+      "WALLA": {
+        name: "Walla / Red Fort Garlands (Lari)",
+        tagline: "28, 56, 100, 600, 1000, 2000, 5000 & 10000 Walla Crackers",
+        bgLight: "bg-red-50/70 border-red-200",
+        svg: `<svg class="w-8 h-8 text-red-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4h16v4H4z"/>
+          <path d="M6 8v12"/>
+          <path d="M10 8v12"/>
+          <path d="M14 8v12"/>
+          <path d="M18 8v12"/>
+          <circle cx="6" cy="20" r="1"/>
+          <circle cx="10" cy="20" r="1"/>
+          <circle cx="14" cy="20" r="1"/>
+          <circle cx="18" cy="20" r="1"/>
+        </svg>`
+      },
+      "PIPES & SHOTS": {
+        name: "Comet, Pipes & Sky Display Shots",
+        tagline: "1\", 2\", 3\" aerial pipes & 9 to 120 multi-colour night sky shows",
+        bgLight: "bg-indigo-50/70 border-indigo-200",
+        svg: `<svg class="w-8 h-8 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+          <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+          <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
+          <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+        </svg>`
+      },
+      "MATCH BOX & CAPES": {
+        name: "Match Boxes & Roll Capes",
+        tagline: "Match Box Classic, VIP Top 10 & Standard Roll Cape",
+        bgLight: "bg-slate-100/70 border-slate-200",
+        svg: `<svg class="w-8 h-8 text-slate-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="16" rx="2"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+          <circle cx="12" cy="15" r="2"/>
+        </svg>`
+      },
+      "GIFT BOXES": {
+        name: "Special Family Gift Box Hampers",
+        tagline: "Assorted family pack gift hampers from 25 to 61 items VIP",
+        bgLight: "bg-emerald-50/70 border-emerald-200",
+        svg: `<svg class="w-8 h-8 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 12 20 22 4 22 4 12"></polyline>
+          <rect x="2" y="7" width="20" height="5"></rect>
+          <line x1="12" y1="22" x2="12" y2="7"></line>
+          <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+          <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+        </svg>`
+      }
+    };
+
+    const CATEGORIES = Object.keys(CATEGORY_META);
+
+    // ----------------------------------------------------
+    // 2. PRODUCT CATALOG
+    // ----------------------------------------------------
+    const ALL_ITEMS = [
+      // FEATURED COMBOS (Pre-discounted net rates, NO EXTRA DISCOUNT)
+      { id: 1001, code: "COMBO-1", name: "STANDARD 3 x 1000 WALA", category: "FEATURED COMBOS", price: 1920, originalPrice: 2742, unit: "3 packs", isCombo: true, desc: "Standard Company Crackers (1000 Wala Magic Red Fort)" },
+      { id: 1002, code: "COMBO-2", name: "DURKESH 3 x 1000 WALA", category: "FEATURED COMBOS", price: 1600, originalPrice: 2280, unit: "3 packs", isCombo: true, desc: "Durkesh Company Crackers (1000 Wala Red Fort)" },
+      { id: 1003, code: "COMBO-3", name: "STANDARD 3 x 25 SHOTS", category: "FEATURED COMBOS", price: 2670, originalPrice: 3816, unit: "3 boxes", isCombo: true, desc: "Standard RMS-25 Multicolour Aerial Shots" },
+      { id: 1004, code: "COMBO-4", name: "DURKESH 3 x 25 SHOTS", category: "FEATURED COMBOS", price: 2340, originalPrice: 3345, unit: "3 boxes", isCombo: true, desc: "Durkesh Crackling Multicolour 25-Shot Aerial Night Show" },
+
+      // SPARKLERS
+      { id: 1, code: "372", name: "12 CM JIMMY SPARKLER", category: "SPARKLERS", price: 80, unit: "box" },
+      { id: 2, code: "379", name: "12CM 4 COLOUR SPARKLER", category: "SPARKLERS", price: 71, unit: "box" },
+      { id: 3, code: "377", name: "12 CM RED COLOUR", category: "SPARKLERS", price: 76, unit: "box" },
+      { id: 4, code: "374", name: "15 CM CRACKLING SPARKLER", category: "SPARKLERS", price: 140, unit: "box" },
+      { id: 5, code: "378", name: "15 CM RED COLOUR SPARKLER", category: "SPARKLERS", price: 118, unit: "box" },
+      { id: 6, code: "801", name: "15CM TRICOLOR SPARKLER", category: "SPARKLERS", price: 370, unit: "box" },
+      { id: 7, code: "380", name: "30 CM GOLD SPARKLERS", category: "SPARKLERS", price: 125, unit: "box" },
+      { id: 8, code: "381", name: "30 CM CRACKLING SPARKLERS", category: "SPARKLERS", price: 140, unit: "box" },
+      { id: 9, code: "900", name: "50 CM SPARKLERS RAJASEKAR", category: "SPARKLERS", price: 390, unit: "box" },
+      { id: 10, code: "901", name: "75 CM SPARKLERS RAJASEKAR", category: "SPARKLERS", price: 450, unit: "box" },
+
+      // ONE SOUND TWO SOUND CRACKERS
+      { id: 11, code: "645", name: "6.5 CM SPARROW", category: "ONE & TWO SOUND", price: 26, unit: "pkt" },
+      { id: 12, code: "646", name: "9 CM LAKSHMI", category: "ONE & TWO SOUND", price: 43, unit: "pkt" },
+      { id: 13, code: "648", name: "10 CM LAKSHMI", category: "ONE & TWO SOUND", price: 61, unit: "pkt" },
+      { id: 14, code: "653", name: "DOUBLE SOUND", category: "ONE & TWO SOUND", price: 65, unit: "pkt" },
+      { id: 15, code: "630", name: "BIJILI 50'S", category: "ONE & TWO SOUND", price: 56, unit: "pkt" },
+      { id: 16, code: "627", name: "BIJILI 100'S", category: "ONE & TWO SOUND", price: 106, unit: "pkt" },
+
+      // FLOWER POTS
+      { id: 17, code: "541", name: "FLOWER POTS SMALL", category: "FLOWER POTS", price: 140, unit: "box (10pcs)" },
+      { id: 18, code: "542", name: "FLOWER POTS BIG", category: "FLOWER POTS", price: 254, unit: "box (10pcs)" },
+      { id: 19, code: "543", name: "FLOWER POTS SPECIAL", category: "FLOWER POTS", price: 340, unit: "box (10pcs)" },
+      { id: 20, code: "544", name: "FLOWER POTS GAINT", category: "FLOWER POTS", price: 693, unit: "box (10pcs)" },
+      { id: 21, code: "903", name: "FLOWER POTS BIG - SONY", category: "FLOWER POTS", price: 350, unit: "box" },
+      { id: 22, code: "904", name: "FLOWER POTS SPECIAL - SONY", category: "FLOWER POTS", price: 450, unit: "box" },
+      { id: 23, code: "549", name: "TRICOLOUR MILLENIUM", category: "FLOWER POTS", price: 803, unit: "box" },
+      { id: 24, code: "696", name: "MINI FOUNTAIN", category: "FLOWER POTS", price: 114, unit: "box" },
+      { id: 25, code: "845", name: "THE GREAT SPLENDOUR", category: "FLOWER POTS", price: 126, unit: "box" },
+      { id: 26, code: "341", name: "HAPPINESS 5PCS", category: "FLOWER POTS", price: 486, unit: "box" },
+      { id: 27, code: "343", name: "CHEERS 3PCS", category: "FLOWER POTS", price: 348, unit: "box" },
+      { id: 28, code: "905", name: "PEACOCK - STARVELL SMALL", category: "FLOWER POTS", price: 370, unit: "box" },
+      { id: 29, code: "906", name: "CRACKLING PEACOCK - AJANTHA", category: "FLOWER POTS", price: 480, unit: "box" },
+      { id: 30, code: "907", name: "BADAA PEACOCK - STARVELL BIG", category: "FLOWER POTS", price: 660, unit: "box" },
+      { id: 31, code: "908", name: "EMU EGG - STARVELL", category: "FLOWER POTS", price: 370, unit: "box" },
+      { id: 32, code: "909", name: "PEARLDROPS - AJANTHA", category: "FLOWER POTS", price: 498, unit: "box" },
+      { id: 33, code: "910", name: "EMERALD STONE", category: "FLOWER POTS", price: 56, unit: "box" },
+      { id: 34, code: "911", name: "OLA / UBER", category: "FLOWER POTS", price: 420, unit: "box" },
+      { id: 35, code: "912", name: "PARTY APPLE", category: "FLOWER POTS", price: 590, unit: "box" },
+      { id: 36, code: "913", name: "CHITPUT", category: "FLOWER POTS", price: 350, unit: "box" },
+      { id: 37, code: "914", name: "GOLDEN DROPS (5 PCS)", category: "FLOWER POTS", price: 655, unit: "box" },
+
+      // ZAMIN CHAKKAR
+      { id: 38, code: "42", name: "ZAMIN CHAKKAR BIG", category: "ZAMIN CHAKKAR", price: 98, unit: "box (10pcs)" },
+      { id: 39, code: "47", name: "ZAMIN CHAKKAR ASHOKA", category: "ZAMIN CHAKKAR", price: 164, unit: "box (10pcs)" },
+      { id: 40, code: "45", name: "ZAMIN CHAKKAR DELUXE", category: "ZAMIN CHAKKAR", price: 360, unit: "box (10pcs)" },
+      { id: 41, code: "52", name: "GROUND CHAKKAR SPECIAL SONY", category: "ZAMIN CHAKKAR", price: 336, unit: "box" },
+      { id: 42, code: "148", name: "SWASTIK WHEEL", category: "ZAMIN CHAKKAR", price: 518, unit: "box" },
+      { id: 43, code: "241", name: "GOLD RUSH", category: "ZAMIN CHAKKAR", price: 531, unit: "box" },
+      { id: 44, code: "915", name: "4x4 WHEEL - STARVELL", category: "ZAMIN CHAKKAR", price: 325, unit: "box" },
+
+      // FANCY CRACKERS
+      { id: 45, code: "916", name: "TWINKLING STAR - 45CM DURKESH", category: "FANCY CRACKERS", price: 89, unit: "box" },
+      { id: 46, code: "553", name: "SILVER TWINKLING - 60 CM", category: "FANCY CRACKERS", price: 136, unit: "box" },
+      { id: 47, code: "230", name: "SILVER TWINKLING - 120 CM", category: "FANCY CRACKERS", price: 286, unit: "box" },
+      { id: 48, code: "555", name: "MULTICOLOUR CANDLE", category: "FANCY CRACKERS", price: 179, unit: "box" },
+      { id: 49, code: "917", name: "WATERFALL PENCIL - STARVELL", category: "FANCY CRACKERS", price: 425, unit: "box" },
+      { id: 50, code: "918", name: "PISTOL 5G - STARVELL", category: "FANCY CRACKERS", price: 445, unit: "box" },
+      { id: 51, code: "919", name: "KURKUREH CRACKLING", category: "FANCY CRACKERS", price: 390, unit: "box" },
+      { id: 52, code: "920", name: "VIO VIOLET", category: "FANCY CRACKERS", price: 420, unit: "box" },
+      { id: 53, code: "921", name: "MAGICAL SWORD", category: "FANCY CRACKERS", price: 590, unit: "box" },
+      { id: 54, code: "922", name: "RACE CAR - STARVELL", category: "FANCY CRACKERS", price: 885, unit: "box" },
+      { id: 55, code: "174", name: "RAINBOW FOG 2PCS", category: "FANCY CRACKERS", price: 344, unit: "box" },
+
+      // WALLA
+      { id: 56, code: "923", name: "SHIN CHAN - STARVELL", category: "WALLA", price: 220, unit: "box" },
+      { id: 57, code: "924", name: "MAGIC BUZZ - AJANTHA", category: "WALLA", price: 390, unit: "box" },
+      { id: 58, code: "D81", name: "MAGIC CRACKER - 28", category: "WALLA", price: 60, unit: "pkt" },
+      { id: 59, code: "D82", name: "MAGIC CRACKER - 56", category: "WALLA", price: 90, unit: "pkt" },
+      { id: 60, code: "D75", name: "MAGIC CRACKER - 100", category: "WALLA", price: 151, unit: "box" },
+      { id: 61, code: "924D", name: "MAGIC CRACKER (DURKESH) - 600", category: "WALLA", price: 728, unit: "box" },
+      { id: 62, code: "925", name: "MAGIC CRACKER (DURKESH) - 1000", category: "WALLA", price: 760, unit: "box" },
+      { id: 63, code: "D76", name: "MAGIC CRACKER (STD) - 1000", category: "WALLA", price: 914, unit: "box" },
+      { id: 64, code: "926", name: "MAGIC CRACKER (DURKESH) - 2000", category: "WALLA", price: 1740, unit: "box" },
+      { id: 65, code: "D77", name: "MAGIC CRACKER (STD) - 2000", category: "WALLA", price: 1744, unit: "box" },
+      { id: 66, code: "D79", name: "MAGIC CRACKER (STD) - 5000", category: "WALLA", price: 4084, unit: "box" },
+      { id: 67, code: "D80", name: "MAGIC CRACKER (STD) - 10000", category: "WALLA", price: 8150, unit: "box" },
+
+      // COMET - PIPES - SHOTS
+      { id: 68, code: "329", name: "METEOR", category: "PIPES & SHOTS", price: 488, unit: "box" },
+      { id: 69, code: "332", name: "AERIAL OUT", category: "PIPES & SHOTS", price: 542, unit: "box" },
+      { id: 70, code: "587", name: "1\" PIPE - RED BLUE PURPLE", category: "PIPES & SHOTS", price: 109, unit: "piece" },
+      { id: 71, code: "927", name: "2\" PIPE - SNOW BALL ROYAL", category: "PIPES & SHOTS", price: 371, unit: "piece" },
+      { id: 72, code: "928", name: "2\" PIPE - SONY FIREWORKS", category: "PIPES & SHOTS", price: 400, unit: "piece" },
+      { id: 73, code: "929", name: "2 1/2 PIPE SONY FIREWORKS", category: "PIPES & SHOTS", price: 855, unit: "piece" },
+      { id: 74, code: "930", name: "2 1/2 PIPE SONY BIG DIA", category: "PIPES & SHOTS", price: 1008, unit: "piece" },
+      { id: 75, code: "E67", name: "3\" PIPE - MIXED COLOUR", category: "PIPES & SHOTS", price: 689, unit: "piece" },
+      { id: 76, code: "931", name: "9 SHOTS GRAND SLAM / CANDY CRUSH", category: "PIPES & SHOTS", price: 780, unit: "box" },
+      { id: 77, code: "932", name: "12 SHOTS MOTUPATLU", category: "PIPES & SHOTS", price: 880, unit: "box" },
+      { id: 78, code: "Y14", name: "12 SHOTS MULTICOLOUR", category: "PIPES & SHOTS", price: 339, unit: "box" },
+      { id: 79, code: "933", name: "25 SHOTS MULTICOLOUR (DURKESH)", category: "PIPES & SHOTS", price: 1115, unit: "box" },
+      { id: 80, code: "Y29", name: "25 SHOTS MULTICOLOUR", category: "PIPES & SHOTS", price: 1272, unit: "box" },
+      { id: 81, code: "Y41", name: "60 SHOTS MULTICOLOUR", category: "PIPES & SHOTS", price: 2308, unit: "box" },
+      { id: 82, code: "Y52", name: "100 SHOTS MULTICOLOUR", category: "PIPES & SHOTS", price: 3379, unit: "box" },
+      { id: 83, code: "Y60", name: "120 SHOTS MULTICOLOUR", category: "PIPES & SHOTS", price: 3922, unit: "box" },
+      { id: 84, code: "934", name: "18 HAND SKY SHOTS", category: "PIPES & SHOTS", price: 900, unit: "box" },
+      { id: 85, code: "935", name: "288 HAND SKY SHOTS", category: "PIPES & SHOTS", price: 1890, unit: "box" },
+
+      // MATCH BOX & ROLL CAPE
+      { id: 86, code: "936", name: "MATCH BOX CLASSIC", category: "MATCH BOX & CAPES", price: 270, unit: "box" },
+      { id: 87, code: "937", name: "MATCH BOX VIP TOP 10", category: "MATCH BOX & CAPES", price: 450, unit: "box" },
+      { id: 88, code: "479", name: "STANDARD ROLL CAPE", category: "MATCH BOX & CAPES", price: 140, unit: "box" },
+
+      // GIFT BOX
+      { id: 89, code: "975", name: "43 ITEMS DIAMOND - STANDARD", category: "GIFT BOXES", price: 3168, unit: "box" },
+      { id: 90, code: "938", name: "25 ITEMS GIFT BOX", category: "GIFT BOXES", price: 740, unit: "box" },
+      { id: 91, code: "939", name: "30 ITEMS GIFT BOX", category: "GIFT BOXES", price: 970, unit: "box" },
+      { id: 92, code: "940", name: "40 ITEMS GIFT BOX", category: "GIFT BOXES", price: 1480, unit: "box" },
+      { id: 93, code: "941", name: "51 ITEMS GIFT BOX - VIP", category: "GIFT BOXES", price: 1950, unit: "box" },
+      { id: 94, code: "942", name: "61 ITEMS GIFT BOX", category: "GIFT BOXES", price: 2700, unit: "box" }
+    ];
+
+    // ----------------------------------------------------
+    // 3. APPLICATION STATE
+    // ----------------------------------------------------
+    const state = {
+      cart: {}, // Mapping of itemId -> quantity
+      searchQuery: '',
+      company: {
+        name: "Bell Book House",
+        subtitle: "Authorised Wholesaler: Standard Fireworks & Durkesh Crackers",
+        orderPhone: "8248185491", // Default order destination
+        supportPhone: "96267 01732",
+        address: "GRK Link Road, Krishnalaya Complex, near Krishna Bakery, Cuddalore - 607 002."
+      }
+    };
+
+    function formatINR(val) {
+      return '₹' + Number(val).toLocaleString('en-IN');
+    }
+
+    // ----------------------------------------------------
+    // 4. TOAST NOTIFICATIONS
+    // ----------------------------------------------------
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      
+      const iconMap = {
+        success: 'fa-solid fa-circle-check text-emerald-400',
+        info: 'fa-solid fa-circle-info text-amber-400',
+        warning: 'fa-solid fa-triangle-exclamation text-rose-400'
+      };
+
+      toast.className = 'pointer-events-auto bg-slate-900 text-white px-3.5 py-2.5 rounded-xl shadow-lg flex items-center gap-2.5 text-xs font-medium transform transition-all duration-200 translate-y-2 opacity-0';
+      toast.innerHTML = `
+        <i class="${iconMap[type] || iconMap.info} text-sm shrink-0"></i>
+        <span class="flex-1">${message}</span>
+        <button onclick="this.parentElement.remove()" class="text-slate-400 hover:text-white ml-1">
+          <i class="fa-solid fa-xmark text-xs"></i>
+        </button>
+      `;
+
+      container.appendChild(toast);
+      requestAnimationFrame(() => toast.classList.remove('translate-y-2', 'opacity-0'));
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-1');
+        setTimeout(() => toast.remove(), 250);
+      }, 2600);
+    }
+
+    // ----------------------------------------------------
+    // 5. STICKY CATEGORY JUMP CHIPS
+    // ----------------------------------------------------
+    function renderCategoryChips() {
+      const container = document.getElementById('category-chips-nav');
+      container.innerHTML = CATEGORIES.map(cat => {
+        const idSafe = cat.replace(/[^a-zA-Z0-9]/g, '_');
+        return `
+          <a 
+            href="#sec-${idSafe}"
+            class="px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 whitespace-nowrap transition-colors shadow-2xs"
+          >
+            ${cat}
+          </a>
+        `;
+      }).join('');
+    }
+
+    // ----------------------------------------------------
+    // 6. RENDER WHOLESALE ORDER SHEET (Compact Table Rows)
+    // ----------------------------------------------------
+    function handleSearch(val) {
+      state.searchQuery = val.trim().toLowerCase();
+      const clearBtn = document.getElementById('clear-search-btn');
+      if (state.searchQuery) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+      renderCatalog();
+    }
+
+    function clearSearch() {
+      document.getElementById('catalog-search').value = '';
+      state.searchQuery = '';
+      document.getElementById('clear-search-btn').classList.add('hidden');
+      renderCatalog();
+    }
+
+    function renderCatalog() {
+      const container = document.getElementById('catalog-sections-container');
+      const emptyState = document.getElementById('catalog-empty-state');
+      let totalVisible = 0;
+      let html = '';
+
+      const financials = calculateFinancials();
+      const activeDiscountPct = financials.discountPct; // 20 or 30
+
+      CATEGORIES.forEach(cat => {
+        const meta = CATEGORY_META[cat];
+        const isComboCat = !!meta.isCombo;
+
+        const items = ALL_ITEMS.filter(item => {
+          if (item.category !== cat) return false;
+          if (!state.searchQuery) return true;
+          return item.name.toLowerCase().includes(state.searchQuery) ||
+                 item.code.toLowerCase().includes(state.searchQuery) ||
+                 item.category.toLowerCase().includes(state.searchQuery);
+        });
+
+        if (items.length === 0) return;
+        totalVisible += items.length;
+
+        const idSafe = cat.replace(/[^a-zA-Z0-9]/g, '_');
+
+        html += `
+          <section id="sec-${idSafe}" class="scroll-mt-36 space-y-3">
+            
+            <!-- Category Graphical Banner Card -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-3.5 sm:p-4 shadow-2xs flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3 min-w-0">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${meta.bgLight} border">
+                  ${meta.svg}
+                </div>
+                <div class="min-w-0">
+                  <div class="flex items-center gap-2">
+                    <h2 class="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight truncate">${meta.name}</h2>
+                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">
+                      ${items.length} item${items.length === 1 ? '' : 's'}
+                    </span>
+                    ${isComboCat ? `
+                      <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-300">
+                        Pre-Discounted Net Price
+                      </span>
+                    ` : ''}
+                  </div>
+                  <p class="text-[11px] text-slate-500 truncate">${meta.tagline}</p>
+                </div>
+              </div>
+
+              <a href="#catalog-search" class="text-[11px] text-slate-400 hover:text-slate-600 font-medium hidden sm:inline shrink-0">
+                Top ↑
+              </a>
+            </div>
+
+            <!-- Wholesale Order Sheet Table Card -->
+            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs">
+              
+              <!-- Desktop Table Header -->
+              <div class="hidden md:grid grid-cols-12 gap-2 bg-slate-50/90 px-4 py-2.5 border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+                <div class="col-span-1">Code</div>
+                <div class="col-span-4">Product Description</div>
+                <div class="col-span-1 text-center">Unit</div>
+                <div class="col-span-2 text-right">Catalog Rate</div>
+                <div class="col-span-2 text-right ${isComboCat ? 'text-amber-800' : 'text-emerald-700'}">
+                  ${isComboCat ? 'Net Combo Price' : `You Pay (${activeDiscountPct}% Off)`}
+                </div>
+                <div class="col-span-2 text-center">Quantity</div>
+              </div>
+
+              <!-- Table Rows -->
+              <div class="divide-y divide-slate-100">
+                ${items.map(item => renderOrderRow(item, activeDiscountPct)).join('')}
+              </div>
+
+            </div>
+
+          </section>
+        `;
+      });
+
+      if (totalVisible === 0) {
+        container.innerHTML = '';
+        emptyState.classList.remove('hidden');
+      } else {
+        emptyState.classList.add('hidden');
+        container.innerHTML = html;
+      }
+    }
+
+    /**
+     * Compact Order-Sheet Row:
+     * - Combos show Net Special Price (no extra % discount)
+     * - Regular items show active 20%/30% discount preview
+     */
+    function renderOrderRow(item, discountPct) {
+      const qty = state.cart[item.id] || 0;
+      const inCart = qty > 0;
+      const isCombo = !!item.isCombo;
+
+      // Offer discount is strictly for non-combo items
+      const payableRate = isCombo ? item.price : Math.round(item.price * (1 - (discountPct / 100)));
+      const lineTotal = item.price * qty;
+
+      return `
+        <div class="px-3.5 sm:px-4 py-2.5 transition-colors ${inCart ? 'bg-amber-50/40' : 'hover:bg-slate-50/60'}">
+          
+          <!-- Desktop Row Layout -->
+          <div class="hidden md:grid grid-cols-12 gap-2 items-center text-xs">
+            
+            <!-- Code -->
+            <div class="col-span-1">
+              <span class="font-mono font-bold text-[11px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">
+                ${item.code}
+              </span>
+            </div>
+
+            <!-- Product Name -->
+            <div class="col-span-4 min-w-0 pr-2">
+              <div class="font-bold text-slate-900 leading-snug truncate" title="${item.name}">${item.name}</div>
+              ${item.desc ? `<div class="text-[10px] text-slate-400 truncate">${item.desc}</div>` : ''}
+            </div>
+
+            <!-- Unit -->
+            <div class="col-span-1 text-center text-slate-500 font-medium text-[11px]">
+              ${item.unit}
+            </div>
+
+            <!-- Catalog Rate -->
+            <div class="col-span-2 text-right">
+              ${item.originalPrice ? `<span class="text-[10px] line-through text-slate-400 block">${formatINR(item.originalPrice)}</span>` : ''}
+              <span class="font-bold text-slate-800">${formatINR(item.price)}</span>
+            </div>
+
+            <!-- Discounted Rate Preview -->
+            <div class="col-span-2 text-right">
+              <span class="font-extrabold ${isCombo ? 'text-amber-800' : 'text-emerald-700'} text-xs">${formatINR(payableRate)}</span>
+              <span class="text-[10px] ${isCombo ? 'text-amber-700' : 'text-emerald-600'} block font-medium">
+                ${isCombo ? 'net (no offer)' : 'net price'}
+              </span>
+            </div>
+
+            <!-- Quantity Stepper with Direct Number Input -->
+            <div class="col-span-2 flex items-center justify-center">
+              <div class="flex items-center bg-white border ${inCart ? 'border-slate-800 ring-1 ring-slate-800/10' : 'border-slate-200'} rounded-lg p-0.5 shadow-2xs">
+                <button 
+                  onclick="updateCartItem(${item.id}, ${qty - 1})" 
+                  class="w-6 h-6 rounded bg-slate-50 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold transition-colors"
+                >
+                  <i class="fa-solid fa-minus text-[9px]"></i>
+                </button>
+
+                <input 
+                  type="number" 
+                  min="0" 
+                  max="999" 
+                  value="${qty > 0 ? qty : ''}" 
+                  placeholder="0" 
+                  oninput="handleDirectQtyInput(${item.id}, this.value)"
+                  class="w-10 text-center font-bold text-xs text-slate-900 bg-transparent outline-none focus:text-slate-950"
+                >
+
+                <button 
+                  onclick="updateCartItem(${item.id}, ${qty + 1})" 
+                  class="w-6 h-6 rounded bg-slate-50 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold transition-colors"
+                >
+                  <i class="fa-solid fa-plus text-[9px]"></i>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Mobile Row Layout -->
+          <div class="md:hidden space-y-1.5">
+            <div class="flex items-start justify-between gap-2">
+              <div class="min-w-0">
+                <div class="flex items-center gap-1.5">
+                  <span class="font-mono font-bold text-[10px] px-1 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200 shrink-0">
+                    ${item.code}
+                  </span>
+                  <h3 class="font-bold text-slate-900 text-xs leading-tight truncate">${item.name}</h3>
+                </div>
+                <div class="flex items-center gap-2 mt-0.5">
+                  <span class="text-[10px] text-slate-400">${item.unit}</span>
+                  ${isCombo ? `<span class="text-[9px] font-bold text-amber-700 bg-amber-50 px-1 rounded">Combo Net Price</span>` : ''}
+                </div>
+              </div>
+
+              <!-- Price Tag on mobile -->
+              <div class="text-right shrink-0">
+                <span class="font-black text-slate-900 text-xs">${formatINR(item.price)}</span>
+                <span class="text-[10px] ${isCombo ? 'text-amber-800 font-semibold' : 'text-emerald-700 font-bold'} block">
+                  ${formatINR(payableRate)} net
+                </span>
+              </div>
+            </div>
+
+            <!-- Stepper line on mobile -->
+            <div class="flex items-center justify-between pt-1 border-t border-slate-100 text-xs">
+              <span class="text-[11px] text-slate-500 font-medium">
+                ${inCart ? `Line Total: <strong class="text-slate-900">${formatINR(lineTotal)}</strong>` : 'Enter quantity:'}
+              </span>
+
+              <div class="flex items-center bg-white border ${inCart ? 'border-slate-800' : 'border-slate-200'} rounded-lg p-0.5 shadow-2xs">
+                <button 
+                  onclick="updateCartItem(${item.id}, ${qty - 1})" 
+                  class="w-7 h-7 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center text-xs font-bold"
+                >
+                  <i class="fa-solid fa-minus text-[10px]"></i>
+                </button>
+
+                <input 
+                  type="number" 
+                  min="0" 
+                  max="999" 
+                  value="${qty > 0 ? qty : ''}" 
+                  placeholder="0" 
+                  oninput="handleDirectQtyInput(${item.id}, this.value)"
+                  class="w-12 text-center font-bold text-xs text-slate-900 bg-transparent outline-none"
+                >
+
+                <button 
+                  onclick="updateCartItem(${item.id}, ${qty + 1})" 
+                  class="w-7 h-7 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center text-xs font-bold"
+                >
+                  <i class="fa-solid fa-plus text-[10px]"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      `;
+    }
+
+    // ----------------------------------------------------
+    // 7. FINANCIAL LOGIC: OFFER NOT APPLICABLE FOR COMBOS
+    // ----------------------------------------------------
+    function handleDirectQtyInput(itemId, valStr) {
+      let val = parseInt(valStr, 10);
+      if (isNaN(val) || val < 0) val = 0;
+      updateCartItem(itemId, val, false);
+    }
+
+    function updateCartItem(itemId, newQty, triggerFeedback = true) {
+      const item = ALL_ITEMS.find(p => p.id === itemId);
+      if (!item) return;
+
+      if (newQty <= 0) {
+        delete state.cart[itemId];
+        if (triggerFeedback) showToast(`Removed "${item.name}"`, 'info');
+      } else {
+        const wasInCart = !!state.cart[itemId];
+        state.cart[itemId] = newQty;
+        if (!wasInCart && triggerFeedback) {
+          showToast(`Added ${item.name} (${newQty})`, 'success');
+        }
+      }
+
+      renderCatalog();
+      renderCart();
+    }
+
+    function removeCartItem(itemId) {
+      updateCartItem(itemId, 0);
+    }
+
+    function confirmClearCart() {
+      if (Object.keys(state.cart).length === 0) return;
+      if (confirm("Clear all items from your order cart?")) {
+        state.cart = {};
+        renderCatalog();
+        renderCart();
+        showToast("Cart cleared", 'info');
+      }
+    }
+
+    /**
+     * Financial computation:
+     * - Discount applies ONLY to regular single items (NOT combos)
+     * - Regular subtotal < ₹3000: Flat 20% discount on regular items
+     * - Regular subtotal >= ₹3000: 30% discount on regular items
+     * - Combos subtotal: 0% discount (added directly as pre-discounted net rate)
+     * - Total Payable = (Regular Subtotal - Discount) + Combos Subtotal
+     */
+    function calculateFinancials() {
+      let regularSubtotal = 0;
+      let comboSubtotal = 0;
+      let totalUnits = 0;
+      let regularUnits = 0;
+      let comboUnits = 0;
+
+      for (const [idStr, qty] of Object.entries(state.cart)) {
+        const item = ALL_ITEMS.find(p => p.id === parseInt(idStr, 10));
+        if (item && qty > 0) {
+          totalUnits += qty;
+          if (item.isCombo) {
+            comboSubtotal += item.price * qty;
+            comboUnits += qty;
+          } else {
+            regularSubtotal += item.price * qty;
+            regularUnits += qty;
+          }
+        }
+      }
+
+      const totalListSubtotal = regularSubtotal + comboSubtotal;
+
+      // Discount tier is calculated on regular items eligible for offer
+      let discountPct = 20;
+      let isUnlocked30 = false;
+      let neededFor30 = 0;
+
+      if (regularSubtotal >= 3000) {
+        discountPct = 30;
+        isUnlocked30 = true;
+      } else {
+        neededFor30 = 3000 - regularSubtotal;
+      }
+
+      const discountAmount = Math.round((regularSubtotal * discountPct) / 100);
+      const grandTotal = Math.max(0, (regularSubtotal - discountAmount) + comboSubtotal);
+
+      return {
+        regularSubtotal,
+        comboSubtotal,
+        totalListSubtotal,
+        totalUnits,
+        regularUnits,
+        comboUnits,
+        discountPct,
+        isUnlocked30,
+        neededFor30,
+        discountAmount,
+        grandTotal
+      };
+    }
+
+    function renderCart() {
+      const listContainer = document.getElementById('cart-items-list');
+      const emptyState = document.getElementById('cart-empty-state');
+      const footer = document.getElementById('cart-footer');
+      const clearBtn = document.getElementById('clear-cart-btn');
+      const drawerSummary = document.getElementById('drawer-item-summary');
+      const navBadge = document.getElementById('nav-cart-count');
+      const discountBanner = document.getElementById('drawer-discount-banner');
+
+      // Mobile bottom bar elements
+      const mobileItems = document.getElementById('mobile-bar-items');
+      const mobileTotal = document.getElementById('mobile-bar-total');
+
+      const itemIds = Object.keys(state.cart).map(Number).filter(id => state.cart[id] > 0);
+      const financials = calculateFinancials();
+
+      navBadge.textContent = financials.totalUnits;
+      mobileItems.textContent = `${financials.totalUnits} items`;
+      mobileTotal.textContent = formatINR(financials.grandTotal);
+
+      if (itemIds.length === 0) {
+        listContainer.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        footer.classList.add('hidden');
+        clearBtn.classList.add('hidden');
+        discountBanner.classList.add('hidden');
+        drawerSummary.textContent = "0 items selected";
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      footer.classList.remove('hidden');
+      clearBtn.classList.remove('hidden');
+      discountBanner.classList.remove('hidden');
+      drawerSummary.textContent = `${financials.totalUnits} unit(s) across ${itemIds.length} item(s)`;
+
+      // Discount Progress Banner
+      if (financials.regularSubtotal > 0) {
+        if (financials.isUnlocked30) {
+          discountBanner.innerHTML = `
+            <div class="flex items-center justify-between text-emerald-800 font-semibold">
+              <span><strong>30% DISCOUNT APPLIED!</strong> on single items (Above ₹3,000 tier)</span>
+              <span class="text-xs font-bold text-emerald-600">Active</span>
+            </div>
+          `;
+        } else {
+          discountBanner.innerHTML = `
+            <div class="flex items-center justify-between text-slate-700">
+              <span>Flat <strong>20% Discount</strong> on single items.</span>
+              <span class="text-emerald-700 font-bold">
+                Add <strong>${formatINR(financials.neededFor30)}</strong> more for <strong>30% OFF</strong>!
+              </span>
+            </div>
+          `;
+        }
+      } else {
+        discountBanner.innerHTML = `
+          <div class="text-slate-600 text-center font-medium">
+            <span>Combos selected (Pre-discounted net rates • No extra offer)</span>
+          </div>
+        `;
+      }
+
+      // Render Items in Drawer
+      listContainer.innerHTML = itemIds.map(id => {
+        const item = ALL_ITEMS.find(p => p.id === id);
+        const qty = state.cart[id];
+        const lineTotal = item.price * qty;
+
+        return `
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 flex items-center justify-between gap-3">
+            <div class="min-w-0">
+              <div class="flex items-center gap-1.5">
+                <span class="text-[9px] font-mono font-bold text-slate-600 bg-white px-1 py-0.2 rounded border border-slate-200">${item.code}</span>
+                <h4 class="font-bold text-slate-900 text-xs truncate" title="${item.name}">${item.name}</h4>
+              </div>
+              <div class="text-[11px] text-slate-500 mt-0.5 flex items-center gap-2">
+                <span>${formatINR(item.price)} × ${qty}</span>
+                <span class="text-slate-300">•</span>
+                <span class="font-bold text-slate-800">${formatINR(lineTotal)}</span>
+                ${item.isCombo ? `<span class="text-[9px] text-amber-700 font-bold bg-amber-100/70 px-1 rounded">Net Combo</span>` : ''}
+              </div>
+            </div>
+
+            <!-- Qty Stepper in Drawer -->
+            <div class="flex items-center gap-1.5 shrink-0">
+              <div class="flex items-center bg-white border border-slate-200 rounded-lg p-0.5">
+                <button onclick="updateCartItem(${item.id}, ${qty - 1})" class="w-6 h-6 text-slate-600 hover:text-slate-900 flex items-center justify-center text-xs">
+                  <i class="fa-solid fa-minus"></i>
+                </button>
+                <span class="w-7 text-center text-xs font-bold text-slate-900">${qty}</span>
+                <button onclick="updateCartItem(${item.id}, ${qty + 1})" class="w-6 h-6 text-slate-600 hover:text-slate-900 flex items-center justify-center text-xs">
+                  <i class="fa-solid fa-plus"></i>
+                </button>
+              </div>
+
+              <button onclick="removeCartItem(${item.id})" class="text-slate-400 hover:text-rose-600 p-1 text-xs">
+                <i class="fa-regular fa-trash-can"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Summary lines
+      document.getElementById('summary-regular-subtotal').textContent = formatINR(financials.regularSubtotal);
+      document.getElementById('summary-discount-badge').textContent = `${financials.discountPct}% OFF`;
+      document.getElementById('summary-discount').textContent = `-${formatINR(financials.discountAmount)}`;
+
+      const comboRow = document.getElementById('summary-combo-row');
+      const comboTotal = document.getElementById('summary-combo-total');
+      if (financials.comboSubtotal > 0) {
+        comboRow.classList.remove('hidden');
+        comboTotal.textContent = formatINR(financials.comboSubtotal);
+      } else {
+        comboRow.classList.add('hidden');
+      }
+
+      document.getElementById('summary-grand-total').textContent = formatINR(financials.grandTotal);
+    }
+
+    // ----------------------------------------------------
+    // 8. DRAWER & MODAL TOGGLING
+    // ----------------------------------------------------
+    function toggleCartDrawer(open) {
+      const container = document.getElementById('cart-drawer-container');
+      const backdrop = document.getElementById('cart-backdrop');
+      const panel = document.getElementById('cart-panel');
+
+      if (open) {
+        container.classList.remove('pointer-events-none');
+        backdrop.classList.remove('opacity-0', 'pointer-events-none');
+        backdrop.classList.add('opacity-100');
+        panel.classList.remove('translate-x-full');
+      } else {
+        backdrop.classList.remove('opacity-100');
+        backdrop.classList.add('opacity-0', 'pointer-events-none');
+        panel.classList.add('translate-x-full');
+        setTimeout(() => container.classList.add('pointer-events-none'), 280);
+      }
+    }
+
+    function generateRandomQuoteId() {
+      const datePart = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+      const randPart = Math.floor(1000 + Math.random() * 9000);
+      return `BBH-${datePart}-${randPart}`;
+    }
+
+    function openQuotationModal() {
+      const financials = calculateFinancials();
+      if (financials.totalUnits === 0) {
+        showToast("Order cart is empty", "warning");
+        return;
+      }
+
+      toggleCartDrawer(false);
+
+      const quoteIdField = document.getElementById('modal-quote-id');
+      if (!quoteIdField.value) {
+        quoteIdField.value = generateRandomQuoteId();
+      }
+
+      const dateField = document.getElementById('modal-quote-date');
+      if (!dateField.value) {
+        dateField.value = new Date().toISOString().slice(0, 10);
+      }
+
+      document.getElementById('modal-summary-items').textContent = 
+        `${financials.totalUnits} items (${financials.regularUnits} single items, ${financials.comboUnits} combos)`;
+      document.getElementById('modal-summary-total').textContent = formatINR(financials.grandTotal);
+
+      document.getElementById('quotation-modal').classList.remove('hidden');
+    }
+
+    function closeQuotationModal() {
+      document.getElementById('quotation-modal').classList.add('hidden');
+    }
+
+    // ----------------------------------------------------
+    // 9. CLIENT-SIDE VECTOR PDF GENERATION (ZERO TAX)
+    // ----------------------------------------------------
+    function buildPDFDocument() {
+      const custName = document.getElementById('cust-name').value.trim() || "Valued Customer";
+      const custPhone = document.getElementById('cust-phone').value.trim() || "N/A";
+      const custAddress = document.getElementById('cust-address').value.trim() || "Cuddalore";
+      const quoteId = document.getElementById('modal-quote-id').value || generateRandomQuoteId();
+      const quoteDate = document.getElementById('modal-quote-date').value || new Date().toISOString().slice(0, 10);
+
+      const financials = calculateFinancials();
+
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4'
+      });
+
+      // Top dark accent bar
+      doc.setFillColor(15, 23, 42); // slate-900
+      doc.rect(0, 0, 210, 4, 'F');
+
+      // Title & Company
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(18);
+      doc.setTextColor(15, 23, 42);
+      doc.text(state.company.name, 14, 16);
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(8.5);
+      doc.setTextColor(71, 85, 105);
+      doc.text(state.company.subtitle, 14, 21);
+      doc.text(state.company.address, 14, 26);
+      doc.text(`Order WhatsApp: ${state.company.orderPhone}  |  Pay & Collect at Store`, 14, 31);
+
+      // Quotation Tag & ID
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(13);
+      doc.setTextColor(15, 23, 42);
+      doc.text("STORE ORDER: PAY & COLLECT", 196, 16, { align: "right" });
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(8.5);
+      doc.setTextColor(100, 116, 139);
+      doc.text(`Order Ref: ${quoteId}`, 196, 22, { align: "right" });
+      doc.text(`Date: ${quoteDate}`, 196, 27, { align: "right" });
+      doc.text(`Single Item Discount: ${financials.discountPct}% OFF`, 196, 32, { align: "right" });
+
+      // Divider
+      doc.setDrawColor(226, 232, 240);
+      doc.setLineWidth(0.4);
+      doc.line(14, 35, 196, 35);
+
+      // Customer Details Box
+      doc.setFillColor(248, 250, 252);
+      doc.roundedRect(14, 38, 182, 17, 2, 2, 'F');
+      doc.setDrawColor(226, 232, 240);
+      doc.roundedRect(14, 38, 182, 17, 2, 2, 'D');
+
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(9);
+      doc.setTextColor(15, 23, 42);
+      doc.text(`Customer: ${custName}`, 18, 44);
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(8);
+      doc.setTextColor(71, 85, 105);
+      doc.text(`Contact: ${custPhone}   |   Location: ${custAddress}   |   Mode: Pay & Collect`, 18, 50);
+
+      // Table Rows
+      const tableRows = [];
+      let idx = 1;
+
+      for (const [idStr, qty] of Object.entries(state.cart)) {
+        const item = ALL_ITEMS.find(p => p.id === parseInt(idStr, 10));
+        if (item && qty > 0) {
+          const catLabel = item.isCombo ? "COMBO (Net)" : item.category;
+          tableRows.push([
+            idx++,
+            item.code,
+            item.name,
+            catLabel,
+            `${qty} ${item.unit}`,
+            "Rs. " + item.price,
+            "Rs. " + (item.price * qty)
+          ]);
+        }
+      }
+
+      doc.autoTable({
+        startY: 59,
+        head: [['#', 'Code', 'Product Description', 'Category', 'Qty', 'Rate', 'Total']],
+        body: tableRows,
+        theme: 'striped',
+        headStyles: {
+          fillColor: [15, 23, 42],
+          textColor: 255,
+          fontStyle: 'bold',
+          fontSize: 8.5,
+          halign: 'left'
+        },
+        columnStyles: {
+          0: { cellWidth: 8, halign: 'center' },
+          1: { cellWidth: 18, halign: 'center' },
+          2: { cellWidth: 70 },
+          3: { cellWidth: 32 },
+          4: { cellWidth: 18, halign: 'center' },
+          5: { cellWidth: 18, halign: 'right' },
+          6: { cellWidth: 18, halign: 'right' }
+        },
+        styles: {
+          font: 'helvetica',
+          fontSize: 8,
+          cellPadding: 2.2,
+          textColor: [30, 41, 59]
+        },
+        alternateRowStyles: {
+          fillColor: [248, 250, 252]
+        }
+      });
+
+      // Financials Summary
+      const finalY = doc.lastAutoTable.finalY + 5;
+      if (finalY > 235) doc.addPage();
+      const sY = finalY > 235 ? 18 : finalY;
+
+      // Left Box: Store Pickup Instructions
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(8.5);
+      doc.setTextColor(15, 23, 42);
+      doc.text("PAY & COLLECT INSTRUCTIONS:", 14, sY + 6);
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(7.5);
+      doc.setTextColor(100, 116, 139);
+      doc.text("1. Share this order to WhatsApp: 8248185491 for advance packing.", 14, sY + 11);
+      doc.text("2. Pay & collect ready stock at Bell Book House, Cuddalore.", 14, sY + 16);
+      doc.text("3. Offers valid on single items (Combos are net discounted bundles).", 14, sY + 21);
+
+      // Right Box: Financial Breakdown
+      const rightX = 115;
+      const rightW = 81;
+
+      doc.setFillColor(248, 250, 252);
+      doc.roundedRect(rightX, sY, rightW, 30, 2, 2, 'F');
+      doc.setDrawColor(226, 232, 240);
+      doc.roundedRect(rightX, sY, rightW, 30, 2, 2, 'D');
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(8);
+      doc.setTextColor(71, 85, 105);
+
+      doc.text("Single Items Total:", rightX + 4, sY + 5);
+      doc.text("Rs. " + financials.regularSubtotal, rightX + rightW - 4, sY + 5, { align: "right" });
+
+      doc.text(`Offer Discount (${financials.discountPct}%):`, rightX + 4, sY + 10);
+      doc.setTextColor(5, 150, 105);
+      doc.text(`-Rs. ${financials.discountAmount}`, rightX + rightW - 4, sY + 10, { align: "right" });
+
+      doc.setTextColor(71, 85, 105);
+      doc.text("Combos (Net Rate):", rightX + 4, sY + 15);
+      doc.text("Rs. " + financials.comboSubtotal, rightX + rightW - 4, sY + 15, { align: "right" });
+
+      doc.setDrawColor(203, 213, 225);
+      doc.line(rightX + 3, sY + 18, rightX + rightW - 3, sY + 18);
+
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(9.5);
+      doc.setTextColor(15, 23, 42);
+      doc.text("NET PAYABLE:", rightX + 4, sY + 25);
+      doc.text("Rs. " + financials.grandTotal, rightX + rightW - 4, sY + 25, { align: "right" });
+
+      // Footer
+      const pageHeight = doc.internal.pageSize.getHeight();
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(7.5);
+      doc.setTextColor(148, 163, 184);
+      doc.text("Bell Book House, Cuddalore - 607 002 • Happy & Safe Diwali!", 105, pageHeight - 8, { align: "center" });
+
+      return { doc, filename: `Order_${quoteId}.pdf` };
+    }
+
+    function generatePDFQuotation(autoClose = true) {
+      const custName = document.getElementById('cust-name').value.trim();
+      if (!custName) {
+        alert("Please enter Customer Name.");
+        document.getElementById('cust-name').focus();
+        return null;
+      }
+
+      showToast("Generating PDF order quotation...", "info");
+      const { doc, filename } = buildPDFDocument();
+      doc.save(filename);
+      showToast(`Downloaded "${filename}"`, "success");
+      if (autoClose) closeQuotationModal();
+      return { doc, filename };
+    }
+
+    // ----------------------------------------------------
+    // 10. SHARE AS PDF DOCUMENT ON WHATSAPP & DIRECT CHAT
+    // ----------------------------------------------------
+    async function sharePDFDocument() {
+      const custName = document.getElementById('cust-name').value.trim();
+      if (!custName) {
+        alert("Please enter your name before sharing order.");
+        document.getElementById('cust-name').focus();
+        return;
+      }
+
+      const quoteId = document.getElementById('modal-quote-id').value || generateRandomQuoteId();
+      const financials = calculateFinancials();
+
+      // 1. Generate crisp vector PDF document
+      showToast("Generating PDF document for WhatsApp...", "info");
+      const { doc, filename } = buildPDFDocument();
+      const pdfBlob = doc.output('blob');
+      const pdfFile = new File([pdfBlob], filename, { type: 'application/pdf' });
+
+      // 2. Web Share API with actual PDF File object (Supported on mobile WhatsApp)
+      if (navigator.canShare && navigator.canShare({ files: [pdfFile] })) {
+        try {
+          await navigator.share({
+            files: [pdfFile],
+            title: `Quotation PDF - ${custName}`,
+            text: `Order ${quoteId} from ${custName} (Net: ${formatINR(financials.grandTotal)}) for Bell Book House (8248185491)`
+          });
+          showToast("PDF document shared to WhatsApp!", "success");
+          closeQuotationModal();
+          return;
+        } catch (err) {
+          if (err.name !== 'AbortError') {
+            console.warn("Share fallback:", err);
+          } else {
+            return; // User dismissed share sheet
+          }
+        }
+      }
+
+      // Desktop fallback (Downloads PDF and opens WhatsApp chat)
+      doc.save(filename);
+      const orderDeskPhone = "918248185491";
+      const waUrl = `https://wa.me/${orderDeskPhone}?text=${encodeURIComponent(`Hello Bell Book House, I have downloaded my order PDF (${filename}) for ${custName} (Pay & Collect). Attaching the PDF now.`)}`;
+      window.open(waUrl, '_blank');
+      showToast(`PDF downloaded! Attach "${filename}" in WhatsApp chat with 8248185491.`, "success");
+      closeQuotationModal();
+    }
+
+    function sendDirectTextOrder() {
+      const custName = document.getElementById('cust-name').value.trim();
+      if (!custName) {
+        alert("Please enter your name before placing order.");
+        document.getElementById('cust-name').focus();
+        return;
+      }
+
+      const custPhone = document.getElementById('cust-phone').value.trim() || "Not provided";
+      const custAddress = document.getElementById('cust-address').value.trim() || "Cuddalore";
+      const quoteId = document.getElementById('modal-quote-id').value || generateRandomQuoteId();
+      const quoteDate = document.getElementById('modal-quote-date').value || new Date().toISOString().slice(0, 10);
+      const financials = calculateFinancials();
+
+      // Save a copy of PDF receipt for customer
+      const { doc, filename } = buildPDFDocument();
+      doc.save(filename);
+
+      // Build structured order message
+      let msg = `*NEW ORDER — PAY & COLLECT*\n`;
+      msg += `*To:* Bell Book House (Order Desk)\n`;
+      msg += `*Order Ref:* ${quoteId} | *Date:* ${quoteDate}\n`;
+      msg += `--------------------------------\n`;
+      msg += `*CUSTOMER DETAILS:*\n`;
+      msg += `• Name: ${custName}\n`;
+      msg += `• Phone: ${custPhone}\n`;
+      msg += `• Location: ${custAddress}\n`;
+      msg += `• Order Mode: *Pay & Collect at Store*\n`;
+      msg += `--------------------------------\n`;
+      msg += `*ITEMS ORDERED:*\n`;
+
+      let idx = 1;
+      for (const [idStr, qty] of Object.entries(state.cart)) {
+        const item = ALL_ITEMS.find(p => p.id === parseInt(idStr, 10));
+        if (item && qty > 0) {
+          const comboTag = item.isCombo ? " [Net Combo]" : "";
+          msg += `${idx}. [${item.code}] ${item.name}${comboTag} (${qty} ${item.unit}) = ₹${item.price * qty}\n`;
+          idx++;
+        }
+      }
+
+      msg += `--------------------------------\n`;
+      if (financials.regularSubtotal > 0) {
+        msg += `• Single Items Total: ${formatINR(financials.regularSubtotal)}\n`;
+        msg += `• Festival Discount (${financials.discountPct}% OFF): -${formatINR(financials.discountAmount)}\n`;
+      }
+      if (financials.comboSubtotal > 0) {
+        msg += `• Combos (Pre-discounted Net): ${formatINR(financials.comboSubtotal)}\n`;
+      }
+      msg += `*NET PAYABLE AMOUNT: ${formatINR(financials.grandTotal)}*\n`;
+      msg += `(All inclusive, Zero tax)\n`;
+      msg += `--------------------------------\n`;
+      msg += `*Store Pickup Location:*\n`;
+      msg += `Bell Book House, GRK Link Road, Krishnalaya Complex, Cuddalore - 607 002.\n`;
+      msg += `_Please keep the packed order ready for collection._`;
+
+      const orderDeskPhone = "918248185491";
+      const waUrl = `https://wa.me/${orderDeskPhone}?text=${encodeURIComponent(msg)}`;
+
+      showToast("Opening WhatsApp chat with 8248185491...", "success");
+      closeQuotationModal();
+
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      if (isMobile) {
+        window.location.href = waUrl;
+      } else {
+        window.open(waUrl, '_blank');
+      }
+    }
+
+    // Keep alias for compatibility
+    function sharePDFViaWhatsApp() {
+      sharePDFDocument();
+    }
+
+    // ----------------------------------------------------
+    // 11. INITIALIZATION
+    // ----------------------------------------------------
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCategoryChips();
+      renderCatalog();
+      renderCart();
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          toggleCartDrawer(false);
+          closeQuotationModal();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
